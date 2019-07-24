@@ -2,6 +2,10 @@ package com.stackroute.muzix.controller;
 
 import com.stackroute.muzix.model.Track;
 import com.stackroute.muzix.service.TrackService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1")
+@Api(value = "Track CRUD Operation")
 public class TrackController {
 
 	private TrackService trackService;
@@ -20,6 +25,13 @@ public class TrackController {
 		this.trackService = trackService;
 	}
 	
+	@ApiOperation(value = "View a list of available track", response = List.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Successfully retrieved list"),
+			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	})
 	@GetMapping(value = "/tracks")
 	public ResponseEntity<?> getAllNotes(){
 		ResponseEntity responseEntity;
@@ -33,6 +45,7 @@ public class TrackController {
 		return responseEntity;
 	}
 	
+	@ApiOperation(value = "Create a Track")
 	@PostMapping(value = "/track")
 	public ResponseEntity<?> saveNote(@RequestBody Track track){
 		ResponseEntity responseEntity;
@@ -45,7 +58,7 @@ public class TrackController {
 		return responseEntity;
 	}
 	
-	
+	@ApiOperation(value = "Update a Track")
 	@PutMapping(value = "/track/{id}")
 	public ResponseEntity<?> updateNote(@PathVariable int id,@RequestBody Track track){
 		ResponseEntity responseEntity;
@@ -58,6 +71,7 @@ public class TrackController {
 		return responseEntity;
 	}
 	
+	@ApiOperation(value = "Delete a Track")
 	@DeleteMapping(value = "/track/{id}")
 	public ResponseEntity<?> deleteNote(@PathVariable("id") int id){
 		ResponseEntity responseEntity;
@@ -70,6 +84,7 @@ public class TrackController {
 		return responseEntity;
 	}
 	
+	@ApiOperation(value = "Get a track by name")
 	@GetMapping(value = "/track/{name}")
 	public ResponseEntity<?> getNote(@PathVariable("name") String name){
 		ResponseEntity responseEntity;
