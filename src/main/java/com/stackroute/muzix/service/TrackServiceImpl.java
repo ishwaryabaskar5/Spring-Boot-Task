@@ -43,4 +43,9 @@ public class TrackServiceImpl implements TrackService {
 			}
 		return false;
 	}
+	
+	@Override
+	public List<Track> findTrackByName(String name) {
+		return trackRepository.trackByName(name);
+	}
 }

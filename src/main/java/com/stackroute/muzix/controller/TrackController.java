@@ -45,19 +45,7 @@ public class TrackController {
 		return responseEntity;
 	}
 	
-	/*@GetMapping(value = "/track/{id}")
-	public ResponseEntity<?> getNote(@PathVariable("id") int id){
-		ResponseEntity responseEntity;
-		Track track;
-		try{
-			track = trackService.getTrackById(id);
-			responseEntity = new ResponseEntity<Track>(track, HttpStatus.OK);
-		} catch (Exception e){
-			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.CONFLICT);
-		}
-		return responseEntity;
-	}
-	*/
+	
 	@PutMapping(value = "/track/{id}")
 	public ResponseEntity<?> updateNote(@PathVariable int id,@RequestBody Track track){
 		ResponseEntity responseEntity;
@@ -81,4 +69,18 @@ public class TrackController {
 		}
 		return responseEntity;
 	}
+	
+	@GetMapping(value = "/track/{name}")
+	public ResponseEntity<?> getNote(@PathVariable("name") String name){
+		ResponseEntity responseEntity;
+		List<Track> tracks;
+		try{
+			tracks = trackService.findTrackByName(name);
+			responseEntity = new ResponseEntity<List<Track>>(tracks, HttpStatus.OK);
+		} catch (Exception e){
+			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.CONFLICT);
+		}
+		return responseEntity;
+	}
+	
 }

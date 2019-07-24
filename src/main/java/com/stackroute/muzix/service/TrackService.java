@@ -14,4 +14,5 @@ public interface TrackService {
 	
 	public boolean updateTrack(int id, Track track);
 	
+	public List<Track> findTrackByName(String name);
 }
