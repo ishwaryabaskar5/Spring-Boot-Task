@@ -23,6 +23,9 @@ public class TrackController {
 	private TrackService trackService;
 	
 	@Autowired
+	GlobalExceptionHandler globalExceptionHandler;
+	
+	@Autowired
 	public TrackController(TrackService trackService) {
 		this.trackService = trackService;
 	}
@@ -43,7 +46,7 @@ public class TrackController {
 			tracks = trackService.getAllTracks();
 			responseEntity = new ResponseEntity<List<Track>>(tracks, HttpStatus.OK);
 		} catch (Exception e){
-			responseEntity = new ResponseEntity<String>("Exceptiom", HttpStatus.BAD_REQUEST);
+			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.BAD_REQUEST);
 		}
 		return responseEntity;
 	}
@@ -56,7 +59,7 @@ public class TrackController {
 			trackService.saveTrack(track);
 			responseEntity = new ResponseEntity<String>("Successfully Created", HttpStatus.CREATED);
 		} catch (TrackAlreadyExistsException e){
-			responseEntity = new ResponseEntity<String>("id already exists", HttpStatus.CONFLICT);
+			responseEntity = globalExceptionHandler.handleTrackAlreadyExistsException();
 		}
 		return responseEntity;
 	}
@@ -69,7 +72,7 @@ public class TrackController {
 			trackService.updateTrack(id,track);
 			responseEntity = new ResponseEntity<String>("Successfully Updated", HttpStatus.OK);
 		} catch (TrackNotFoundException e){
-			responseEntity = new ResponseEntity<String>("id not found", HttpStatus.CONFLICT);
+			responseEntity = globalExceptionHandler.handleTrackNotFoundException();
 		}
 		return responseEntity;
 	}
@@ -82,7 +85,7 @@ public class TrackController {
 			trackService.deleteTrack(id);
 			responseEntity = new ResponseEntity<String>("Successfully Deleted", HttpStatus.OK);
 		} catch (TrackNotFoundException e){
-			responseEntity = new ResponseEntity<String>("id not found", HttpStatus.CONFLICT);
+			responseEntity = globalExceptionHandler.handleTrackNotFoundException();
 		}
 		return responseEntity;
 	}

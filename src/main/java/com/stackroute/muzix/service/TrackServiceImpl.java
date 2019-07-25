@@ -22,7 +22,7 @@ public class TrackServiceImpl implements TrackService {
 	@Override
 	public boolean saveTrack(Track track) throws TrackAlreadyExistsException {
 		if (trackRepository.existsById(track.getId()))
-			throw new TrackAlreadyExistsException("Track id already exists");
+			throw new TrackAlreadyExistsException();
 		trackRepository.save(track);
 			return true;
 	}
@@ -30,7 +30,7 @@ public class TrackServiceImpl implements TrackService {
 	@Override
 	public boolean deleteTrack(int id) throws TrackNotFoundException{
 		if (!trackRepository.existsById(id))
-			throw new TrackNotFoundException("Track not found");
+			throw new TrackNotFoundException();
 		trackRepository.deleteById(id);
 			return true;
 	}
@@ -44,7 +44,7 @@ public class TrackServiceImpl implements TrackService {
 	@Override
 	public boolean updateTrack(int id, Track track) throws TrackNotFoundException{
 		if(!trackRepository.existsById(id)){
-			throw new TrackNotFoundException("Track not found");
+			throw new TrackNotFoundException();
 		}
 		trackRepository.save(track);
 		return true;
