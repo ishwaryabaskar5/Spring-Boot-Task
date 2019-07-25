@@ -1,5 +1,6 @@
 package com.stackroute.muzix.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -12,8 +13,18 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+	
+	@Value("${title}")
+	String title;
+	@Value("${description}")
+	String description;
+	@Value("${version}")
+	String version;
+	
 	@Bean
 	public Docket api() {
+		
+		
 		return new Docket(DocumentationType.SWAGGER_2).select()
 				.apis(RequestHandlerSelectors
 						.basePackage("com.stackroute.muzix.controller"))
@@ -21,11 +32,9 @@ public class SwaggerConfig {
 				.build().apiInfo(apiEndPointsInfo());
 	}
 	private ApiInfo apiEndPointsInfo() {
-		return new ApiInfoBuilder().title("Spring Boot REST API")
-				.description("Muzix REST API")
-				.license("Apache 2.0")
-				.licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
-				.version("1.0.0")
+		return new ApiInfoBuilder().title(title)
+				.description(description)
+				.version(version)
 				.build();
 	}
 }

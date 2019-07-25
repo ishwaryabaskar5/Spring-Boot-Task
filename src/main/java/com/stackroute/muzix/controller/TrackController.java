@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,9 @@ import java.util.List;
 public class TrackController {
 
 	private TrackService trackService;
+	
+	@Value("${successMessage}")
+	private String successMessage;
 	
 	@Autowired
 	GlobalExceptionHandler globalExceptionHandler;
@@ -46,7 +50,7 @@ public class TrackController {
 			tracks = trackService.getAllTracks();
 			responseEntity = new ResponseEntity<List<Track>>(tracks, HttpStatus.OK);
 		} catch (Exception e){
-			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.BAD_REQUEST);
+			responseEntity = globalExceptionHandler.handleException();
 		}
 		return responseEntity;
 	}
@@ -57,7 +61,7 @@ public class TrackController {
 		ResponseEntity responseEntity;
 		try{
 			trackService.saveTrack(track);
-			responseEntity = new ResponseEntity<String>("Successfully Created", HttpStatus.CREATED);
+			responseEntity = new ResponseEntity<String>(successMessage, HttpStatus.CREATED);
 		} catch (TrackAlreadyExistsException e){
 			responseEntity = globalExceptionHandler.handleTrackAlreadyExistsException();
 		}
@@ -70,7 +74,7 @@ public class TrackController {
 		ResponseEntity responseEntity;
 		try{
 			trackService.updateTrack(id,track);
-			responseEntity = new ResponseEntity<String>("Successfully Updated", HttpStatus.OK);
+			responseEntity = new ResponseEntity<String>(successMessage, HttpStatus.OK);
 		} catch (TrackNotFoundException e){
 			responseEntity = globalExceptionHandler.handleTrackNotFoundException();
 		}
@@ -83,7 +87,7 @@ public class TrackController {
 		ResponseEntity responseEntity;
 		try{
 			trackService.deleteTrack(id);
-			responseEntity = new ResponseEntity<String>("Successfully Deleted", HttpStatus.OK);
+			responseEntity = new ResponseEntity<String>(successMessage, HttpStatus.OK);
 		} catch (TrackNotFoundException e){
 			responseEntity = globalExceptionHandler.handleTrackNotFoundException();
 		}
@@ -99,7 +103,7 @@ public class TrackController {
 			tracks = trackService.findTrackByName(name);
 			responseEntity = new ResponseEntity<List<Track>>(tracks, HttpStatus.OK);
 		} catch (Exception e){
-			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.CONFLICT);
+			responseEntity = globalExceptionHandler.handleException();
 		}
 		return responseEntity;
 	}
