@@ -1,3 +1,4 @@
+
 package com.stackroute.muzix.model;
 
 import lombok.AllArgsConstructor;
@@ -6,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/*creates a table track with id, name, comment columns using @Entity @Id @Column annotation */
+/*lombok annotations @Data @AllArgsConstructor @NoArgsConstructor are used for creating constructor, getter and setter*/
 @Entity
 @Data
 @AllArgsConstructor
