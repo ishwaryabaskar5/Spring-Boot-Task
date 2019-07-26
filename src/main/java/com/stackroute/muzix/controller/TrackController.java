@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping("api/v1")       //  class level request mapping
 @Api(value = "Track CRUD Operation")
 public class TrackController {
 
@@ -25,6 +25,8 @@ public class TrackController {
 		this.trackService = trackService;
 	}
 	
+//  maps the http get method url with corresponding service method
+//	addi swagger documentation for the method with possible responses
 	@ApiOperation(value = "View a list of available track", response = List.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Successfully retrieved list"),
@@ -45,6 +47,7 @@ public class TrackController {
 		return responseEntity;
 	}
 	
+//	maps the http post method url with corresponding service method
 	@ApiOperation(value = "Create a Track")
 	@PostMapping(value = "/track")
 	public ResponseEntity<?> saveNote(@RequestBody Track track){
@@ -58,6 +61,8 @@ public class TrackController {
 		return responseEntity;
 	}
 	
+	
+//	maps the http put method url with corresponding service method
 	@ApiOperation(value = "Update a Track")
 	@PutMapping(value = "/track/{id}")
 	public ResponseEntity<?> updateNote(@PathVariable int id,@RequestBody Track track){
@@ -71,6 +76,7 @@ public class TrackController {
 		return responseEntity;
 	}
 	
+//	maps the http delete method url with corresponding service method
 	@ApiOperation(value = "Delete a Track")
 	@DeleteMapping(value = "/track/{id}")
 	public ResponseEntity<?> deleteNote(@PathVariable("id") int id){
@@ -84,6 +90,7 @@ public class TrackController {
 		return responseEntity;
 	}
 	
+//	maps the http get method url with corresponding service method
 	@ApiOperation(value = "Get a track by name")
 	@GetMapping(value = "/track/{name}")
 	public ResponseEntity<?> getNote(@PathVariable("name") String name){
