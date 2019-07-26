@@ -17,30 +17,34 @@ public class TrackServiceImpl implements TrackService {
 		this.trackRepository = trackRepository;
 	}
 	
-	@Override
-	public boolean saveTrack(Track track) {
-			trackRepository.save(track);
-			return true;
-	}
-	
-	@Override
-	public boolean deleteTrack(int id) {
-			trackRepository.deleteById(id);
-			return true;
-	}
-	
+	//	method for getting all the tracks in database and returns as a response entity
 	@Override
 	public List<Track> getAllTracks() {
 		List<Track> trackList = trackRepository.findAll();
 		return trackList;
 	}
 	
+	// 	method for creating a new track DB
+	@Override
+	public boolean saveTrack(Track track) {
+		trackRepository.save(track);
+		return true;
+	}
+	
+	// 	method for delete a track from DB using id
+	@Override
+	public boolean deleteTrack(int id) {
+		trackRepository.deleteById(id);
+		return true;
+	}
+	
+	// 	method for update a already available track in DB
 	@Override
 	public boolean updateTrack(int id, Track track) {
-			if(trackRepository.existsById(id) == true){
-				trackRepository.save(track);
-				return true;
-			}
+		if(trackRepository.existsById(id) == true){
+			trackRepository.save(track);
+			return true;
+		}
 		return false;
 	}
 }
