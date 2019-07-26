@@ -4,6 +4,7 @@ import com.stackroute.muzix.model.Track;
 
 import java.util.List;
 
+//Service interface
 public interface TrackService {
 	
 	public boolean saveTrack(Track track);
