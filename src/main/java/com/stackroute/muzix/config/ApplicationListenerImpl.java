@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-
+//Class implements ApplicationListener interface
 @Component
 public class ApplicationListenerImpl implements ApplicationListener<ContextRefreshedEvent> {
 	

@@ -14,4 +14,9 @@ Back.
 information whenever the application starts. Use both approaches:
 Approach 1: ApplicationListener<ContextRefreshedEvent>
 Approach 2: CommandLineRunner (Find out how it differs from ApplicationRunner)
-7.Global exception using Controller advice
+7. Global exception using Controller advice
+8. Remove all hard coded data from the application code to application.properties
+a)by using @Value.
+b)by using @PropertySource
+c)by using Environment
+

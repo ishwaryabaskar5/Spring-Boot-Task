@@ -4,6 +4,7 @@ import org.jboss.logging.Logger;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+//Class implements CommandLineRunner interface
 @Component
 public class CommandLineRunnerImpl implements CommandLineRunner {
 	private static final Logger LOG = Logger.getLogger(CommandLineRunnerImpl.class);
