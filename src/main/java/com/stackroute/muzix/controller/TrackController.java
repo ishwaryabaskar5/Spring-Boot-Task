@@ -53,8 +53,8 @@ public class TrackController {
 	public ResponseEntity<?> saveNote(@RequestBody Track track){
 		ResponseEntity responseEntity;
 		try{
-			trackService.saveTrack(track);
-			responseEntity = new ResponseEntity<String>("Successfully Created", HttpStatus.CREATED);
+			responseEntity = new ResponseEntity<Track>(trackService.saveTrack(track), HttpStatus.CREATED);
+
 		} catch (Exception e){
 			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.CONFLICT);
 		}
@@ -68,8 +68,7 @@ public class TrackController {
 	public ResponseEntity<?> updateNote(@PathVariable int id,@RequestBody Track track){
 		ResponseEntity responseEntity;
 		try{
-			trackService.updateTrack(id,track);
-			responseEntity = new ResponseEntity<String>("Successfully Updated", HttpStatus.OK);
+			responseEntity = new ResponseEntity<Track>(trackService.updateTrack(id,track), HttpStatus.OK);
 		} catch (Exception e){
 			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.CONFLICT);
 		}
@@ -81,9 +80,9 @@ public class TrackController {
 	@DeleteMapping(value = "/track/{id}")
 	public ResponseEntity<?> deleteNote(@PathVariable("id") int id){
 		ResponseEntity responseEntity;
-		try{
-			trackService.deleteTrack(id);
-			responseEntity = new ResponseEntity<String>("Successfully Deleted", HttpStatus.OK);
+		try{	
+			responseEntity = new ResponseEntity<Track>(trackService.deleteTrack(id), HttpStatus.OK);
+
 		} catch (Exception e){
 			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.CONFLICT);
 		}
