@@ -28,7 +28,7 @@ public class TrackServiceImpl implements TrackService {
 	
 // 	method for creating a new track DB
 	@Override
-	public boolean saveTrack(Track track) throws TrackAlreadyExistsException {
+	public Track saveTrack(Track track) throws TrackAlreadyExistsException {
 		if (trackRepository.existsById(track.getId()))
 			throw new TrackAlreadyExistsException();
 		return trackRepository.save(track);
@@ -37,7 +37,7 @@ public class TrackServiceImpl implements TrackService {
 
 // 	method for delete a track from DB using id
 	@Override
-	public boolean deleteTrack(int id) throws TrackNotFoundException{
+	public Track deleteTrack(int id) throws TrackNotFoundException{
 		Optional<Track> track =null;
 		if(trackRepository.existsById(id) == true) {
 			trackRepository.deleteById(id);
@@ -48,7 +48,7 @@ public class TrackServiceImpl implements TrackService {
 	
 // 	method for update a already available track in DB
 	@Override
-	public boolean updateTrack(int id, Track track) throws TrackNotFoundException{
+	public Track updateTrack(int id, Track track) throws TrackNotFoundException{
 		if(trackRepository.existsById(id) == true){
 				return trackRepository.save(track);
 			}
