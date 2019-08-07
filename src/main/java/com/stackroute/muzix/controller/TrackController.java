@@ -22,7 +22,7 @@ public class TrackController {
 	
 //  maps the http get method url with corresponding service method
 	@GetMapping(value = "/tracks")
-	public ResponseEntity<?> getAllNotes(){
+	public ResponseEntity<?> getAllTracks(){
 		ResponseEntity responseEntity;
 		List<Track> tracks;
 		try{
@@ -38,12 +38,11 @@ public class TrackController {
 	
 	//	maps the http post method url with corresponding service method
 	@PostMapping(value = "/track")
-	public ResponseEntity<?> saveNote(@RequestBody Track track){
+	public ResponseEntity<?> saveTrack(@RequestBody Track track){
 		ResponseEntity responseEntity;
 		try{
-//			calls saveTrack() from service
-			trackService.saveTrack(track);
-			responseEntity = new ResponseEntity<String>("Successfully Created", HttpStatus.CREATED);
+//			calls updateTrack() from service
+			responseEntity = new ResponseEntity<Track>(trackService.saveTrack(id,track), HttpStatus.OK);
 		} catch (Exception e){
 			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.CONFLICT);
 		}
@@ -52,12 +51,11 @@ public class TrackController {
 	
 //	maps the http put method url with corresponding service method
 	@PutMapping(value = "/track/{id}")
-	public ResponseEntity<?> updateNote(@PathVariable int id,@RequestBody Track track){
+	public ResponseEntity<?> deleteTrack(@PathVariable int id,@RequestBody Track track){
 		ResponseEntity responseEntity;
 		try{
 //			calls updateTrack() from service
-			trackService.updateTrack(id,track);
-			responseEntity = new ResponseEntity<String>("Successfully Updated", HttpStatus.OK);
+			responseEntity = new ResponseEntity<Track>(trackService.deleteTrack(id,track), HttpStatus.OK);
 		} catch (Exception e){
 			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.CONFLICT);
 		}
@@ -66,12 +64,11 @@ public class TrackController {
 	
 	//	maps the http delete method url with corresponding service method
 	@DeleteMapping(value = "/track/{id}")
-	public ResponseEntity<?> deleteNote(@PathVariable("id") int id){
+	public ResponseEntity<?> deleteTrack(@PathVariable("id") int id){
 		ResponseEntity responseEntity;
-		try{
-//			calls deleteTrack() from service
-			trackService.deleteTrack(id);
-			responseEntity = new ResponseEntity<String>("Successfully Deleted", HttpStatus.OK);
+	try{
+//			calls updateTrack() from service
+			responseEntity = new ResponseEntity<Track>(trackService.deleteTrack(id,track), HttpStatus.OK);
 		} catch (Exception e){
 			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.CONFLICT);
 		}
@@ -80,7 +77,7 @@ public class TrackController {
 	
 //	maps the http get method url with corresponding service method
 	@GetMapping(value = "/track/{name}")
-	public ResponseEntity<?> getNote(@PathVariable("name") String name){
+	public ResponseEntity<?> get	TrackByName(@PathVariable("name") String name){
 		ResponseEntity responseEntity;
 		List<Track> tracks;
 		try{
