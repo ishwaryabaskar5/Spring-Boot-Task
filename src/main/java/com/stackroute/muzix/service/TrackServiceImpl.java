@@ -18,21 +18,31 @@ public class TrackServiceImpl implements TrackService {
 	public TrackServiceImpl(TrackRepository trackRepository) {
 		this.trackRepository = trackRepository;
 	}
-	
+// 	method for creating a new track DB
 	@Override
-	public boolean saveTrack(Track track) throws TrackAlreadyExistsException {
-		if (trackRepository.existsById(track.getId()))
-			throw new TrackAlreadyExistsException("Track id already exists");
-		trackRepository.save(track);
-			return true;
+	public Track saveTrack(Track track) {
+			return trackRepository.save(track);
+	}
+
+// 	method for delete a track from DB using id
+	@Override
+	public Track deleteTrack(int id) {
+		Optional<Track> track =null;
+		if(trackRepository.existsById(id) == true) {
+			trackRepository.deleteById(id);
+			track= trackRepository.findById(id);
+		}
+		return track.get();
 	}
 	
+// 	method for update a already available track in DB
 	@Override
-	public boolean deleteTrack(int id) throws TrackNotFoundException{
-		if (!trackRepository.existsById(id))
-			throw new TrackNotFoundException("Track not found");
-		trackRepository.deleteById(id);
-			return true;
+	public Track updateTrack(int id, Track track) {
+			if(trackRepository.existsById(id) == true){
+				return trackRepository.save(track);
+			}
+			else
+				return null;
 	}
 	
 	@Override
@@ -41,14 +51,7 @@ public class TrackServiceImpl implements TrackService {
 		return trackList;
 	}
 	
-	@Override
-	public boolean updateTrack(int id, Track track) throws TrackNotFoundException{
-		if(!trackRepository.existsById(id)){
-			throw new TrackNotFoundException("Track not found");
-		}
-		trackRepository.save(track);
-		return true;
-	}
+	
 	
 	@Override
 	public List<Track> findTrackByName(String name){
