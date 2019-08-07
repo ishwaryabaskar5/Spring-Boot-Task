@@ -21,54 +21,60 @@ public class TrackController {
 	}
 	
 	//  maps the http get method url with corresponding service method
-	@GetMapping(value = "/tracks")
-	public ResponseEntity<?> getAllNotes(){
+		@GetMapping(value = "/tracks")
+	public ResponseEntity<?> getAllTracks(){
 		ResponseEntity responseEntity;
 		List<Track> tracks;
 		try{
+//			calls getAllTracks() from service
 			tracks = trackService.getAllTracks();
 			responseEntity = new ResponseEntity<List<Track>>(tracks, HttpStatus.OK);
 		} catch (Exception e){
 			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.BAD_REQUEST);
 		}
+//		returns response entity
 		return responseEntity;
 	}
 	
-	//  maps the http post method url with corresponding service method
+//	maps the http post method url with corresponding service method
+	@ApiOperation(value = "Create a Track")
 	@PostMapping(value = "/track")
-	public ResponseEntity<?> saveNote(@RequestBody Track track){
+	public ResponseEntity<?> saveTrack(@RequestBody Track track){
 		ResponseEntity responseEntity;
 		try{
-			trackService.saveTrack(track);
-			responseEntity = new ResponseEntity<String>("Successfully Created", HttpStatus.CREATED);
-		} catch (Exception e){
-			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.CONFLICT);
+//			calls saveTrack() from service
+			responseEntity = new ResponseEntity<Track>(trackService.saveTrack(track), HttpStatus.CREATED);
+		} catch (TrackAlreadyExistsException e){
+			responseEntity = globalExceptionHandler.handleTrackAlreadyExistsException();
 		}
 		return responseEntity;
 	}
+//	maps the http put method url with corresponding service method
 	
-	//  maps the http put method url with corresponding service method
+	@ApiOperation(value = "Update a Track")
 	@PutMapping(value = "/track/{id}")
-	public ResponseEntity<?> updateNote(@PathVariable int id,@RequestBody Track track){
+	public ResponseEntity<?> updateTrack(@PathVariable int id,@RequestBody Track track){
 		ResponseEntity responseEntity;
 		try{
-			trackService.updateTrack(id,track);
-			responseEntity = new ResponseEntity<String>("Successfully Updated", HttpStatus.OK);
-		} catch (Exception e){
-			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.CONFLICT);
+//			calls updateTrack() from service
+			responseEntity = new ResponseEntity<Track>(trackService.updateTrack(id,track), HttpStatus.OK);
+		} catch (TrackNotFoundException e){
+			responseEntity = globalExceptionHandler.handleTrackNotFoundException();
 		}
 		return responseEntity;
 	}
 	
-	//  maps the http delete method url with corresponding service method
+//	maps the http delete method url with corresponding service method
+	@ApiOperation(value = "Delete a Track")
 	@DeleteMapping(value = "/track/{id}")
-	public ResponseEntity<?> deleteNote(@PathVariable("id") int id){
+
+	public ResponseEntity<?> deleteTrack(@PathVariable("id") int id){
 		ResponseEntity responseEntity;
 		try{
-			trackService.deleteTrack(id);
-			responseEntity = new ResponseEntity<String>("Successfully Deleted", HttpStatus.OK);
-		} catch (Exception e){
-			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.CONFLICT);
+//			calls deleteTrack() from service
+			responseEntity = new ResponseEntity<Track>(trackService.deleteTrack(id), HttpStatus.OK);
+		} catch (TrackNotFoundException e){
+			responseEntity = globalExceptionHandler.handleTrackNotFoundException();
 		}
 		return responseEntity;
 	}
