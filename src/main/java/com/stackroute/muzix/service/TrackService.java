@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface TrackService {
 	
-	public boolean saveTrack(Track track) throws TrackAlreadyExistsException;
+	 boolean saveTrack(Track track) throws TrackAlreadyExistsException;
 	
-	public boolean deleteTrack(int id) throws TrackNotFoundException;
+	 boolean deleteTrack(int id) throws TrackNotFoundException;
 	
-	public List<Track> getAllTracks();
+	 List<Track> getAllTracks();
 	
-	public boolean updateTrack(int id, Track track) throws TrackNotFoundException;
+	 boolean updateTrack(int id, Track track) throws TrackNotFoundException;
 	
-	public List<Track> findTrackByName(String name);
+	 List<Track> findTrackByName(String name);
 }
