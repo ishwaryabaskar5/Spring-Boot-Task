@@ -31,27 +31,29 @@ public class TrackServiceImpl implements TrackService {
 	public boolean saveTrack(Track track) throws TrackAlreadyExistsException {
 		if (trackRepository.existsById(track.getId()))
 			throw new TrackAlreadyExistsException();
-		trackRepository.save(track);
-			return true;
+		return trackRepository.save(track);
+	
 	}
 
 // 	method for delete a track from DB using id
 	@Override
 	public boolean deleteTrack(int id) throws TrackNotFoundException{
-		if (!trackRepository.existsById(id))
-			throw new TrackNotFoundException();
-		trackRepository.deleteById(id);
-			return true;
+		Optional<Track> track =null;
+		if(trackRepository.existsById(id) == true) {
+			trackRepository.deleteById(id);
+			track= trackRepository.findById(id);
+		}
+		return track.get();
 	}
 	
 // 	method for update a already available track in DB
 	@Override
 	public boolean updateTrack(int id, Track track) throws TrackNotFoundException{
-		if(!trackRepository.existsById(id)){
-			throw new TrackNotFoundException();
-		}
-		trackRepository.save(track);
-		return true;
+		if(trackRepository.existsById(id) == true){
+				return trackRepository.save(track);
+			}
+			else
+				return null;
 	}
 	
 	@Override
