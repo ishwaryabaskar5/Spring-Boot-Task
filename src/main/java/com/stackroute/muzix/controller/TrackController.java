@@ -36,7 +36,7 @@ public class TrackController {
 	
 	
 	@GetMapping(value = "/tracks")
-	public ResponseEntity<?> getAllNotes(){
+	public ResponseEntity<?> getAllTracks(){
 		ResponseEntity responseEntity;
 		List<Track> tracks;
 		try{
@@ -50,11 +50,11 @@ public class TrackController {
 	
 	@ApiOperation(value = "Create a Track")
 	@PostMapping(value = "/track")
-	public ResponseEntity<?> saveNote(@RequestBody Track track){
+	public ResponseEntity<?> saveTrack(@RequestBody Track track){
 		ResponseEntity responseEntity;
-		try{
-			trackService.saveTrack(track);
-			responseEntity = new ResponseEntity<String>("Successfully Created", HttpStatus.CREATED);
+		try{		
+			responseEntity = new ResponseEntity<Track>(trackService.saveTrack(track), HttpStatus.CREATED);
+
 		} catch (TrackAlreadyExistsException e){
 			responseEntity = new ResponseEntity<String>("id already exists", HttpStatus.CONFLICT);
 		}
@@ -63,11 +63,10 @@ public class TrackController {
 	
 	@ApiOperation(value = "Update a Track")
 	@PutMapping(value = "/track/{id}")
-	public ResponseEntity<?> updateNote(@PathVariable int id,@RequestBody Track track){
+	public ResponseEntity<?> updateTrack(@PathVariable int id,@RequestBody Track track){
 		ResponseEntity responseEntity;
 		try{
-			trackService.updateTrack(id,track);
-			responseEntity = new ResponseEntity<String>("Successfully Updated", HttpStatus.OK);
+			responseEntity = new ResponseEntity<Track>(trackService.updateTrack(id,track), HttpStatus.OK);
 		} catch (TrackNotFoundException e){
 			responseEntity = new ResponseEntity<String>("id not found", HttpStatus.CONFLICT);
 		}
@@ -76,11 +75,11 @@ public class TrackController {
 	
 	@ApiOperation(value = "Delete a Track")
 	@DeleteMapping(value = "/track/{id}")
-	public ResponseEntity<?> deleteNote(@PathVariable("id") int id){
+	public ResponseEntity<?> deleteTrack(@PathVariable("id") int id){
 		ResponseEntity responseEntity;
 		try{
-			trackService.deleteTrack(id);
-			responseEntity = new ResponseEntity<String>("Successfully Deleted", HttpStatus.OK);
+			responseEntity = new ResponseEntity<Track>(trackService.deleteTrack(id), HttpStatus.OK);
+
 		} catch (TrackNotFoundException e){
 			responseEntity = new ResponseEntity<String>("id not found", HttpStatus.CONFLICT);
 		}
@@ -89,7 +88,7 @@ public class TrackController {
 	
 	@ApiOperation(value = "Get a track by name")
 	@GetMapping(value = "/track/{name}")
-	public ResponseEntity<?> getNote(@PathVariable("name") String name){
+	public ResponseEntity<?> getTrack(@PathVariable("name") String name){
 		ResponseEntity responseEntity;
 		List<Track> tracks;
 		try{
