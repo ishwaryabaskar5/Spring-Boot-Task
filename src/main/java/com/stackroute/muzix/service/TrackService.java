@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface TrackService {
 	
-	public boolean saveTrack(Track track);
+	 boolean saveTrack(Track track);
 	
-	public boolean deleteTrack(int id);
+	 boolean deleteTrack(int id);
 	
-	public List<Track> getAllTracks();
+	 List<Track> getAllTracks();
 	
-	public boolean updateTrack(int id, Track track);
+	 boolean updateTrack(int id, Track track);
 	
-	public void getTopTracks();
+	 void getTopTracks();
 }
