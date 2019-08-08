@@ -18,14 +18,14 @@ public class TrackServiceImpl implements TrackService {
 		this.trackRepository = trackRepository;
 	}
 	
-//	method for getting all the tracks in database and returns as a response entity
+//	method for getting all the tracks from database
 	@Override
 	public List<Track> getAllTracks() {
 		List<Track> trackList = trackRepository.findAll();
 		return trackList;
 	}
 	
-// 	method for creating a new track DB
+// 	method for creating a new track in DB
 	@Override
 	public Track saveTrack(Track track) {
 			return trackRepository.save(track);
@@ -42,7 +42,7 @@ public class TrackServiceImpl implements TrackService {
 		return track.get();
 	}
 	
-// 	method for update a already available track in DB
+// 	method for update an existing track in DB
 	@Override
 	public Track updateTrack(int id, Track track) {
 			if(trackRepository.existsById(id) == true){
