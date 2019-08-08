@@ -20,7 +20,7 @@ public class TrackController {
 		this.trackService = trackService;
 	}
 	
-	//  maps the http get method url with corresponding service method
+//  maps the http get method url with corresponding service method
 	@GetMapping(value = "/tracks")
 	public ResponseEntity<?> getAllTracks(){
 		ResponseEntity responseEntity;
@@ -36,7 +36,7 @@ public class TrackController {
 		return responseEntity;
 	}
 	
-	//	maps the http post method url with corresponding service method
+//	maps the http post method url with corresponding service method
 	@PostMapping(value = "/track")
 	public ResponseEntity<?> saveTrack(@RequestBody Track track){
 		ResponseEntity responseEntity;
@@ -49,7 +49,7 @@ public class TrackController {
 		return responseEntity;
 	}
 	
-	//	maps the http put method url with corresponding service method
+//	maps the http put method url with corresponding service method
 	@PutMapping(value = "/track/{id}")
 	public ResponseEntity<?> updateTrack(@PathVariable int id,@RequestBody Track track){
 		ResponseEntity responseEntity;
@@ -62,7 +62,7 @@ public class TrackController {
 		return responseEntity;
 	}
 	
-	//	maps the http delete method url with corresponding service method
+//	maps the http delete method url with corresponding service method
 	@DeleteMapping(value = "/track/{id}")
 	public ResponseEntity<?> deleteTrack(@PathVariable("id") int id){
 		ResponseEntity responseEntity;
