@@ -9,10 +9,11 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-
+//implementation class for ApplicationListener interface
 @Component
 public class ApplicationListenerImpl implements ApplicationListener<ContextRefreshedEvent> {
-	
+
+//	Logger instance
 	private static final Logger LOG = Logger.getLogger(ApplicationListenerImpl.class);
 	public static int counter;
 	
@@ -21,6 +22,7 @@ public class ApplicationListenerImpl implements ApplicationListener<ContextRefre
 	
 	
 	@Override
+//	seed data in database
 	public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 		LOG.info("Increment counter");
 		counter++;
@@ -28,7 +30,7 @@ public class ApplicationListenerImpl implements ApplicationListener<ContextRefre
 			trackService.saveTrack(new Track(1,"aaa","aaa"));
 			trackService.saveTrack(new Track(2,"bbb","bbb"));
 		} catch (TrackAlreadyExistsException e) {
-			e.printStackTrace();
+			LOG.error(e);
 		}
 	}
 }

@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/*creates a table track with id, name, comment columns using @Entity @Id @Column annotation */
+/*lombok annotations @Data @AllArgsConstructor @NoArgsConstructor are used for creating constructor, getter and setter*/
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -15,7 +18,6 @@ import javax.persistence.*;
 @ApiModel(description = "All details about the Track. ")
 public class Track {
 	@Id
-//	@GeneratedValue(strategy= GenerationType.AUTO)
 	@ApiModelProperty(notes = "Track ID")
 	private int id;
 	
