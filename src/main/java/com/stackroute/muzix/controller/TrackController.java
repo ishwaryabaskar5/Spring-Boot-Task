@@ -35,15 +35,15 @@ public class TrackController {
 		this.trackService = trackService;
 	}
 	
-//  maps the http get method url with corresponding service method
 	@ApiOperation(value = "View a list of available track", response = List.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Successfully retrieved list"),
 			@ApiResponse(code = 400, message = "Bad Request"),
 			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
 	})
-	
-	
+
+
+//  maps the http get method url with corresponding service method
 	@GetMapping(value = "/tracks")
 	public ResponseEntity<?> getAllNotes(){
 		ResponseEntity responseEntity;
@@ -54,30 +54,6 @@ public class TrackController {
 			responseEntity = new ResponseEntity<List<Track>>(tracks, HttpStatus.OK);
 		} catch (Exception e){
 			responseEntity = globalExceptionHandler.handleException();
-		}
-//		returns response entity
-		return responseEntity;
-	}
-	
-//	maps the http post method url with corresponding service method
-	@ApiOperation(value = "View a list of available track", response = List.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Successfully retrieved list"),
-			@ApiResponse(code = 400, message = "Bad Request"),
-			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
-	})
-	
-	
-	@GetMapping(value = "/tracks")
-	public ResponseEntity<?> getAllTracks(){
-		ResponseEntity responseEntity;
-		List<Track> tracks;
-		try{
-//			calls getAllTracks() from service
-			tracks = trackService.getAllTracks();
-			responseEntity = new ResponseEntity<List<Track>>(tracks, HttpStatus.OK);
-		} catch (Exception e){
-			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.BAD_REQUEST);
 		}
 //		returns response entity
 		return responseEntity;
@@ -96,8 +72,8 @@ public class TrackController {
 		}
 		return responseEntity;
 	}
-//	maps the http put method url with corresponding service method
 	
+//	maps the http put method url with corresponding service method
 	@ApiOperation(value = "Update a Track")
 	@PutMapping(value = "/track/{id}")
 	public ResponseEntity<?> updateTrack(@PathVariable int id,@RequestBody Track track){
@@ -128,6 +104,7 @@ public class TrackController {
 	
 	@ApiOperation(value = "Get a track by name")
 	@GetMapping(value = "/track/{name}")
+//	maps the http get method url with corresponding service method
 	public ResponseEntity<?> getTrackByName(@PathVariable("name") String name){
 		ResponseEntity responseEntity;
 		List<Track> tracks;
