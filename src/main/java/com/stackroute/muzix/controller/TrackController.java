@@ -25,7 +25,6 @@ public class TrackController {
 		this.trackService = trackService;
 	}
 	
-	//  maps the http get method url with corresponding service method
 //	addi swagger documentation for the method with possible responses
 	@ApiOperation(value = "View a list of available track", response = List.class)
 	@ApiResponses(value = {
@@ -35,6 +34,7 @@ public class TrackController {
 	})
 	
 	
+//  maps the http get method url with corresponding service method
 	@GetMapping(value = "/tracks")
 	public ResponseEntity<?> getAllTracks(){
 		ResponseEntity responseEntity;

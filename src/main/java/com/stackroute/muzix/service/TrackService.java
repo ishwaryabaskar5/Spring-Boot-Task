@@ -6,14 +6,15 @@ import com.stackroute.muzix.model.Track;
 
 import java.util.List;
 
+//TrackService interface
 public interface TrackService {
 	
-	 boolean saveTrack(Track track) throws TrackAlreadyExistsException;
+	 Track saveTrack(Track track) throws TrackAlreadyExistsException;
 	
-	 boolean deleteTrack(int id) throws TrackNotFoundException;
+	 Track deleteTrack(int id) throws TrackNotFoundException;
 	
 	 List<Track> getAllTracks();
 	
-	 boolean updateTrack(int id, Track track) throws TrackNotFoundException;
+	 Track updateTrack(int id, Track track) throws TrackNotFoundException;
 	
 }
