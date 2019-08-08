@@ -7,13 +7,13 @@ import java.util.List;
 //service interfaces
 public interface TrackService {
 	
-	 boolean saveTrack(Track track);
+	 Track saveTrack(Track track);
 	
- boolean deleteTrack(int id);
+	 Track deleteTrack(int id);
 	
 	 List<Track> getAllTracks();
 	
-	 boolean updateTrack(int id, Track track);
+	 Track updateTrack(int id, Track track);
 	
 	 List<Track> findTrackByName(String name);
 }

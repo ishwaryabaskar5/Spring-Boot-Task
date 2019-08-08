@@ -15,7 +15,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Track {
 	@Id
-//	@GeneratedValue(strategy= GenerationType.AUTO)
 	private int id;
 	
 	@Column

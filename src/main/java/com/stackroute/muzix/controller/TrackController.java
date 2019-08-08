@@ -42,7 +42,7 @@ public class TrackController {
 		ResponseEntity responseEntity;
 		try{
 //			calls updateTrack() from service
-			responseEntity = new ResponseEntity<Track>(trackService.saveTrack(id,track), HttpStatus.OK);
+			responseEntity = new ResponseEntity<Track>(trackService.saveTrack(track), HttpStatus.OK);
 		} catch (Exception e){
 			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.CONFLICT);
 		}
@@ -51,11 +51,11 @@ public class TrackController {
 	
 //	maps the http put method url with corresponding service method
 	@PutMapping(value = "/track/{id}")
-	public ResponseEntity<?> deleteTrack(@PathVariable int id,@RequestBody Track track){
+	public ResponseEntity<?> updateTrack(@PathVariable int id,@RequestBody Track track){
 		ResponseEntity responseEntity;
 		try{
 //			calls updateTrack() from service
-			responseEntity = new ResponseEntity<Track>(trackService.deleteTrack(id,track), HttpStatus.OK);
+			responseEntity = new ResponseEntity<Track>(trackService.updateTrack(id,track), HttpStatus.OK);
 		} catch (Exception e){
 			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.CONFLICT);
 		}
@@ -68,7 +68,7 @@ public class TrackController {
 		ResponseEntity responseEntity;
 	try{
 //			calls updateTrack() from service
-			responseEntity = new ResponseEntity<Track>(trackService.deleteTrack(id,track), HttpStatus.OK);
+			responseEntity = new ResponseEntity<Track>(trackService.deleteTrack(id), HttpStatus.OK);
 		} catch (Exception e){
 			responseEntity = new ResponseEntity<String>("Exception", HttpStatus.CONFLICT);
 		}
@@ -77,7 +77,7 @@ public class TrackController {
 	
 //	maps the http get method url with corresponding service method
 	@GetMapping(value = "/track/{name}")
-	public ResponseEntity<?> get	TrackByName(@PathVariable("name") String name){
+	public ResponseEntity<?> getTrackByName(@PathVariable("name") String name){
 		ResponseEntity responseEntity;
 		List<Track> tracks;
 		try{
