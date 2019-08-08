@@ -9,13 +9,13 @@ import java.util.List;
 //Service interface
 public interface TrackService {
 	
-	boolean saveTrack(Track track) throws TrackAlreadyExistsException;
+	Track saveTrack(Track track) throws TrackAlreadyExistsException;
 	
-	boolean deleteTrack(int id) throws TrackNotFoundException;
+	Track deleteTrack(int id) throws TrackNotFoundException;
 	
 	List<Track> getAllTracks();
 	
-	boolean updateTrack(int id, Track track) throws TrackNotFoundException;
+	Track updateTrack(int id, Track track) throws TrackNotFoundException;
 	
 	List<Track> findTrackByName(String name);
 }

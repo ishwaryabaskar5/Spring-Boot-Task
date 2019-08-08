@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TrackServiceImpl implements TrackService {
@@ -19,14 +20,14 @@ public class TrackServiceImpl implements TrackService {
 		this.trackRepository = trackRepository;
 	}
 	
-//	method for getting all the tracks in database and returns as a response entity
+//	method for getting all the tracks from database
 	@Override
 	public List<Track> getAllTracks() {
 		List<Track> trackList = trackRepository.findAll();
 		return trackList;
 	}
 	
-// 	method for creating a new track DB
+// 	method for creating a new track in DB
 	@Override
 	public Track saveTrack(Track track) throws TrackAlreadyExistsException {
 		if (trackRepository.existsById(track.getId()))
