@@ -32,6 +32,7 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<String>(trackNotFoundExceptionMeassage,HttpStatus.CONFLICT);
 	}
 	
+//	ExceptionHandler for Exception class
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity handleException(){
 		return new ResponseEntity<String>(exceptionMessage,HttpStatus.CONFLICT);

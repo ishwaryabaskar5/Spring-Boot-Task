@@ -35,23 +35,14 @@ public class TrackController {
 		this.trackService = trackService;
 	}
 	
+	@ApiOperation(value = "View a list of available track", response = List.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Successfully retrieved list"),
+			@ApiResponse(code = 400, message = "Bad Request"),
+			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	})
+
 //  maps the http get method url with corresponding service method
-	@ApiOperation(value = "View a list of available track", response = List.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Successfully retrieved list"),
-			@ApiResponse(code = 400, message = "Bad Request"),
-			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
-	})
-	
-	
-	@ApiOperation(value = "View a list of available track", response = List.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Successfully retrieved list"),
-			@ApiResponse(code = 400, message = "Bad Request"),
-			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
-	})
-	
-	
 	@GetMapping(value = "/tracks")
 	public ResponseEntity<?> getAllTracks(){
 		ResponseEntity responseEntity;

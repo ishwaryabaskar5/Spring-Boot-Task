@@ -15,7 +15,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-	
+
+//	hardcoded value is removed using Value annotation
 	@Value("${title}")
 	String title;
 	@Value("${description}")
