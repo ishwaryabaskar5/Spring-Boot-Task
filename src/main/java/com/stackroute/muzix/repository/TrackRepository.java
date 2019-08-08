@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface TrackRepository extends JpaRepository<Track,Integer> {
 	
-	//	create method for getting the track by name
+	//method for getting the track by name
 	@Query("SELECT t FROM Track t WHERE t.name = ?1")
 	public List<Track> trackByName(String name);
 }
