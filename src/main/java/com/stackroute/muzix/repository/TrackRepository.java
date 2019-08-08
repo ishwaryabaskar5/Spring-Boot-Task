@@ -9,11 +9,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/* creates TrackRepository which extends JpaRepository for Track Object */
+/* TrackRepository extends JpaRepository for Track Object */
 @Repository
 public interface TrackRepository extends JpaRepository<Track,Integer> {
 	
-	//	create method for getting the track by name
+	//	custom method for getting the track by name
 	@Query("SELECT t FROM Track t WHERE t.name = ?1")
 	public List<Track> trackByName(String name);
 }
